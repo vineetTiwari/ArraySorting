@@ -31,9 +31,71 @@ int main(int argc, const char * argv[]) {
       }
       return (NSComparisonResult)NSOrderedSame;
     }];
-    NSLog(@"Array with the longest string first:%@", longestStringArray);
+    NSLog(@"Array with the longest string first:1%@", longestStringArray);
 
+    //Sorting the initial array alphabetically by the last character of the string object.
+    NSArray *alphabeticallyByTheLastCharacterArray = [initialArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+
+      NSString *lastcharacterFirstObject = [obj1 substringFromIndex:[obj1 length] - 1 ];
+      NSString *lastcharacterSecondObject = [obj2 substringFromIndex:[obj2 length] - 1 ];
+
+      return [lastcharacterFirstObject compare:lastcharacterSecondObject options:NSLiteralSearch];
+    }];
+    NSLog(@"%@", alphabeticallyByTheLastCharacterArray);
+
+    //Sorting the initial array by the occurances of 'e' in each object of the array.
+    NSArray *sortByTheOccuranceOfEArray = [initialArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+      if (([obj1 rangeOfString:@"e"].length) > ([obj2 rangeOfString:@"e"].length)) {
+        return (NSComparisonResult)NSOrderedAscending;
+      }
+      if (([obj2 rangeOfString:@"e"].length) > ([obj1 rangeOfString:@"e"].length)) {
+        return (NSComparisonResult)NSOrderedDescending;
+      }
+      return (NSComparisonResult)NSOrderedSame;
+    }];
+    NSLog(@"%@", sortByTheOccuranceOfEArray);
 
   }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
